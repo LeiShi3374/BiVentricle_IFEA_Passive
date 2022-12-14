@@ -1,0 +1,129 @@
+#----------------------------------------------------------------
+# General simulation parameters
+
+Continue previous simulation: 0
+Number of spatial dimensions: 3
+Number of time steps: 5 #20000
+Time step size: 0.01715
+Spectral radius of infinite time step: 0.50
+Searched file name to trigger stop: STOP_SIM
+
+Save results to VTK format: t
+Save results in folder: 05_mesh_01result
+Name prefix of saved VTK files: result
+Increment in saving VTK files: 1
+Start saving after time step: 1
+
+Increment in saving restart files: 5
+Convert BIN to VTK format: f
+
+Verbose: t
+Warning: t
+Debug: f
+
+#----------------------------------------------------------------
+# Mesh data
+Add mesh: msh {
+      Mesh file path: 05_mesh_01/mesh-complete.mesh.vtu
+   Add face: endo_lv {
+      Face file path: 05_mesh_01/mesh-surfaces/endo_lv.vtp
+   }
+   Add face: top {
+      Face file path: 05_mesh_01/mesh-surfaces/top.vtp
+   }
+   Add face: epi_mid {
+      Face file path: 05_mesh_01/mesh-surfaces/epi_mid.vtp
+   }
+   Add face: epi_apex {
+      Face file path: 05_mesh_01/mesh-surfaces/epi_apex.vtp
+   }
+   Add face: endo_rv {
+      Face file path: 05_mesh_01/mesh-surfaces/endo_rv.vtp
+   }
+
+      Fiber direction file path: 05_mesh_01/fibersLong.vtu
+      Fiber direction file path: 05_mesh_01/fibersSheet.vtu
+   Mesh scale factor: 1
+}
+
+#----------------------------------------------------------------
+Add equation: ustruct {
+   Coupled: t
+   Min iterations: 3
+   Max iterations: 10
+   Tolerance: 1e-4
+
+   Density: 1.055# 5.0e1
+   Elasticity modulus: 100000.0
+   Poisson ratio: 0.483333
+   Viscosity: 400.0
+   
+   Momentum stabilization coefficient: 1e-4
+   Continuity stabilization coefficient: 0.0
+
+   Constitutive model: HO-ma {
+      a: 213.0099594053716
+      b: 40.0
+      a4f: 23454.896886737934
+      b4f: 15.604860739835917
+      a4s: 1327.2000529911486
+      b4s: 10.51889688582731
+      afs: 2160.0
+      bfs: 11.25
+      k: 100.0
+   }
+   Dilational penalty model: ST91
+
+   Output: Spatial {
+      Displacement: t
+      Def_grad: t
+      
+   }
+
+   LS type: GMRES
+   {
+      Preconditioner: Trilinos-ILUT
+      Tolerance: 1e-6
+      Max iterations: 100
+      Krylov space dimension: 50
+   }
+
+   Add BC: epi_apex {
+      Type: Robin
+      Stiffness: 1.0e7
+      Damping: 0.0
+      Apply along normal direction: t
+   }
+   
+   Add BC: epi_mid {
+      Type: Robin
+      Stiffness: 1.0e7
+      Damping: 0.0
+      Apply along normal direction: t
+   }
+   
+   Add BC: top {
+      Type: Robin
+      Stiffness: 1.0e2
+      Damping: 0.0
+      #Apply along normal direction: t
+   }
+
+
+   Add BC: endo_lv {
+      Type: Neu
+      Time dependence: Unsteady
+      Temporal values file path: pressure_lv_p.dat
+      Ramp function: f
+      Follower pressure load: t
+   }
+   
+   Add BC: endo_rv {
+      Type: Neu
+      Time dependence: Unsteady
+      Temporal values file path: pressure_rv_p.dat
+      Ramp function: f
+      Follower pressure load: t
+   }
+}
+

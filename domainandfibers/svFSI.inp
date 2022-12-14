@@ -1,0 +1,217 @@
+#----------------------------------------------------------------
+# General simulation parameters
+
+Continue previous simulation: f
+Number of spatial dimensions: 3
+Number of time steps: 20
+Time step size: 0.1
+Spectral radius of infinite time step: 0.50
+Searched file name to trigger stop: STOP_SIM
+
+Overwrite restart file: 0
+Save results to VTK format: 1
+Name prefix of saved VTK files: result
+Increment in saving VTK files: 20
+Start saving after time step: 1
+Save averaged results: 0
+
+Increment in saving restart files: 1000
+Convert BIN to VTK format: 0
+
+Verbose: 1
+Warning: 0
+Debug: 0
+
+#----------------------------------------------------------------
+# Mesh data
+Add mesh: msh {
+   Mesh file path:    ../05_mesh_ref/mesh-complete.mesh.vtu
+   Add face: top {
+      Face file path: ../05_mesh_ref/mesh-surfaces/top.vtp
+   }
+   Add face: epi_mid {
+      Face file path: ../05_mesh_ref/mesh-surfaces/epi_mid.vtp
+   }
+   Add face: epi_apex {
+      Face file path: ../05_mesh_ref/mesh-surfaces/epi_apex.vtp
+   }
+   Add face: endo_lv {
+      Face file path: ../05_mesh_ref/mesh-surfaces/endo_lv.vtp
+   }
+   Add face: endo_rv {
+      Face file path: ../05_mesh_ref/mesh-surfaces/endo_rv.vtp
+   }
+}
+
+#================================================================
+# Equations
+
+Add equation: heatS {
+   Coupled: f
+   Min iterations: 1
+   Max iterations: 5
+   Tolerance: 1e-6
+#   Residual dB reduction: -120.0
+
+   Conductivity: 1.0
+   Source term: 0.0
+   Density: 0.0
+
+   LS type: GMRES
+   {
+      Preconditioner: Trilinos-ILUT
+      Max iterations:      100
+      Tolerance:           1D-6
+      Krylov space dimension: 50
+   }
+
+   Add BC: top {
+      Type: Dir
+      Value: 1.0
+      Zero out perimeter: f
+   }
+
+   Add BC: epi_apex {
+      Type: Dir
+      Value: 0.0
+   }
+   
+   Output: Alias { Temperature: phi_AB }
+}
+
+#----------------------------------------------------------------
+
+Add equation: heatS {
+   Coupled: f
+   Min iterations: 1
+   Max iterations: 5
+   Tolerance: 1e-6
+#   Residual dB reduction: -120.0
+
+   Conductivity: 1.0
+   Source term: 0.0
+   Density: 0.0
+
+   LS type: GMRES
+   {
+      Preconditioner: Trilinos-ILUT
+      Max iterations:      100
+      Tolerance:           1D-6
+      Krylov space dimension: 50
+   }
+
+   Add BC: endo_lv {
+      Type: Dir
+      Value: 1.0
+      Zero out perimeter: f
+   }
+
+   Add BC: endo_rv {
+      Type: Dir
+      Value: 0.0
+   }
+
+   Add BC: epi_mid {
+      Type: Dir
+      Value: 0.0
+   }
+
+   Add BC: epi_apex {
+      Type: Dir
+      Value: 0.0
+   }
+   
+   Output: Alias { Temperature: phi_LV }
+}
+
+#----------------------------------------------------------------
+
+Add equation: heatS {
+   Coupled: f
+   Min iterations: 1
+   Max iterations: 5
+   Tolerance: 1e-6
+#   Residual dB reduction: -120.0
+
+   Conductivity: 1.0
+   Source term: 0.0
+   Density: 0.0
+
+   LS type: GMRES
+   {
+      Preconditioner: Trilinos-ILUT
+      Max iterations:      100
+      Tolerance:           1D-6
+      Krylov space dimension: 50
+   }
+
+   Add BC: endo_rv {
+      Type: Dir
+      Value: 1.0
+      Zero out perimeter: f
+   }
+
+   Add BC: endo_lv {
+      Type: Dir
+      Value: 0.0
+   }
+
+   Add BC: epi_mid {
+      Type: Dir
+      Value: 0.0
+   }
+
+   Add BC: epi_apex {
+      Type: Dir
+      Value: 0.0
+   }
+   
+   Output: Alias { Temperature: phi_RV }
+}
+
+#----------------------------------------------------------------
+
+Add equation: heatS {
+   Coupled: f
+   Min iterations: 1
+   Max iterations: 5
+   Tolerance: 1e-6
+#   Residual dB reduction: -120.0
+
+   Conductivity: 1.0
+   Source term: 0.0
+   Density: 0.0
+
+   LS type: GMRES
+   {
+      Preconditioner: Trilinos-ILUT
+      Max iterations:      100
+      Tolerance:           1D-6
+      Krylov space dimension: 50
+   }
+
+   Add BC: epi_mid {
+      Type: Dir
+      Value: 1.0
+      Zero out perimeter: f
+   }
+
+   Add BC: epi_apex {
+      Type: Dir
+      Value: 1.0
+      Zero out perimeter: f
+   }
+
+   Add BC: endo_rv {
+      Type: Dir
+      Value: 0.0
+   }
+
+   Add BC: endo_lv {
+      Type: Dir
+      Value: 0.0
+   }
+   
+   Output: Alias { Temperature: phi_EPI }
+}
+#================================================================
