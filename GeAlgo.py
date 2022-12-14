@@ -1,3 +1,6 @@
+'''This is the code for genetic algorithm. 3 Parts are included
+- the main section, the selection part, and the genchild part
+'''
 import numpy as np
 import numpy.matlib as npm
 from scipy.special import comb

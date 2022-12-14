@@ -1,3 +1,11 @@
+'''This code is designed to find both the stress-free configuration
+and the optimized material parameters for the passive process
+from the diastasis to the end-diastolic states
+HO model is used as the constitutive model and GA is used for
+the IFEA process
+by Lei Shi at Vedula Lab in Columbia University 2022
+'''
+
 import numpy as np
 import os
 import shutil
@@ -16,6 +24,7 @@ def Simulations(x):
     if os.path.isdir("05_mesh_00") == False:
         shutil.copytree("05_mesh_ref", "05_mesh_00")
 
+    # Get material parameters
     m_a = 10 ** x[0]
     m_b = x[1]
     m_af = 10 ** x[2]
@@ -30,6 +39,7 @@ def Simulations(x):
     mat_para_opt = np.array([m_a, m_b, m_af, m_bf, m_as, m_bs, m_afs, m_bfs])
     mat_para_fix = np.array([m_eta, m_E])
 
+    # Node index for selected landmarks
     lv_p_gindex = np.array([3769,2138,1591])
     rv_p_gindex = np.array([7289,7421,1548])
     epi_p_gindex = np.array([6314,4259,1353])
@@ -77,17 +87,12 @@ def Simulations(x):
 
     return fit_err
 
-# x0 = np.empty([6])
-# x0[0] = np.log10(590) # 1585
-# x0[1] = 8.023
-# x0[2] = np.log10(184720)
-# x0[3] = 16.026 # 28.882
-# x0[4] = np.log10(24810)
-# x0[5] = 11.12
-
 tinit = time.time()
 
 # GA #################################################
+# lower and upper boundaries for parameters
+# a, b, a_f, b_f, a_s, b_s NOTE: a, a_f, a_s are log10-ed to
+# avoid order effects
 lb = np.array([2,1,3,1,3,1])
 ub = np.array([5,40,6,40,6,40])
 

@@ -1,5 +1,6 @@
-## This file is to update the svFSI.inp file and run the simulation
-## to generate the simulation result
+'''This file is to update the svFSI.inp file and run the simulation
+ to generate the simulation result
+'''
 
 import numpy as np
 import os

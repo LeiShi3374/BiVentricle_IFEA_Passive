@@ -1,3 +1,7 @@
+'''This code is to test the result obtained from the IFEA process
+by Lei Shi at Vedula Lab in Columbia University 2022
+'''
+
 import numpy as np
 import os
 import shutil
@@ -17,15 +21,16 @@ fname = os.getcwd() + "/"
 if os.path.isdir("05_mesh_00") == False:
     shutil.copytree("05_mesh_ref", "05_mesh_00")
 
-m_a = 1585 # 1585
+# Define material parameters
+m_a = 1585
 m_b = 7.41
 m_af = 10262
-m_bf = 28.882 # 28.882
+m_bf = 28.882
 m_as = 271
 m_bs = 4.08
 m_afs = 2160
 m_bfs = 11.25
-m_eta = 400 # 400
+m_eta = 400
 m_E = 1.0e5
 
 mat_para_opt = np.array([m_a, m_b, m_af, m_bf, m_as, m_bs, m_afs, m_bfs])
