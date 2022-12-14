@@ -18,7 +18,7 @@ https://github.com/LeiShi3374/svFSI
 
 Use Genetic Algorithm to search for the passive material parameters for the bi-ventricular model and find the stress-free configuration at the same time. 
 
-### Hyperparameter and boundary conditions
+### Hyperparameter and variable boundary 
 
 lb and ub defines the lower and upper boundaries of the material parameters. 
 
