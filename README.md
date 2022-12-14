@@ -43,7 +43,7 @@ example, the image data of 4 time points (70%, 80%, 90%, 90% RR-interval) are us
 
 ### Boundary conditions 
 
-The pressures exerted on the LV and RV endocardium surfaces are from literature. 
+The pressures exerted on the LV and RV endocardium surfaces are from literature (pressure_lv_p.dat and pressure_rv_p.dat). 
 
 The Robin boundaries are used to simulate the pericardium effects. (Pfaller, Martin R., et al. "The importance of the pericardium for cardiac biomechanics: from physiology to computational modeling." Biomechanics and modeling in mechanobiology 18.2 (2019): 503-529.)
 
