@@ -25,7 +25,9 @@ The example used here is using the HO model (Holzapfel, Gerhard A., and Ray W. O
 6 material parameters a, b, a_f, b_f, a_s, b_s are set for free to optimize. 
 
 The folder morph contains the registered image data obtained using the morphing algorithm, serving as the real data to be captured using the model. In the current
-example, the image data of 4 time points (70%, 80%, 90%, 90% RR-interval) are used which cover the deformation from the diastasis to the end-diastolic states.   
+example, the image data of 4 time points (70%, 80%, 90%, 90% RR-interval) are used which cover the deformation from the diastasis to the end-diastolic states. 
+
+The pressures exerted on the LV and RV endocardium surfaces are from literature. 
 
 The objective function to minimize is the difference of the LV and RV volume changes, and the displacements of several landmarks between the image and FEA data.   
 
