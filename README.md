@@ -33,6 +33,8 @@ The objective function to minimize is the difference of the LV and RV volume cha
 
 9 landmarks are selected from the left and right endocardium surfaces and the epicardium surface. 
 
+Currently, only Genetic Algorithm is supported in this framework, and it will be updated to also support the Bayesian optimization and MCMC. 
+
 
 
 
