@@ -32,6 +32,10 @@ If other model is used, the corresponding sections in the main function and the 
 
 In the current example, 6 HO material parameters a, b, a_f, b_f, a_s, b_s are set for free to optimize. 
 
+### Mesh data 
+
+The mesh data including the fiber orientations are included in the folder "05_mesh_ref". The fiber orientations are generated using a rule-based method following the method in the paper Bayer, Jason D., et al. "A novel rule-based algorithm for assigning myocardial fiber orientation to computational heart models." Annals of biomedical engineering 40.10 (2012): 2243-2254. 
+
 ### Experimental data 
 
 The folder "morph" contains the registered image data obtained using the morphing algorithm, serving as the real data to be captured using the model. In the current
